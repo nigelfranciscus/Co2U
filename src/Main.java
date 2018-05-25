@@ -96,13 +96,13 @@ public class Main {
 				regionValue.setRegion(row[3]);
 				regionList.put(regionKey, regionValue);
 			}
-
-			BufferedReader lineReader = new BufferedReader(new FileReader(
-					"C:/Users/s2876731.STAFF/Documents/AIRtravel/New Monthly/New 2017/griffith_2017m01.csv"));
-			FileWriter writer = new FileWriter(
-					"C:/Users/s2876731.STAFF/Documents/AIRtravel/New Monthly/New 2017/Results/griffith_2017m01.csv");
-			FileWriter missingAirport = new FileWriter(
-					"C:/Users/s2876731.STAFF/Documents/AIRtravel/New Monthly/New 2017/Results/missing.csv");
+			
+			for (int j = 1; j < 13; j++){
+			BufferedReader lineReader = new BufferedReader(
+					new FileReader("D:/AIRtravel/New Monthly/New 2018/griffith_2018m0" + j + ".csv"));
+			FileWriter writer = new FileWriter("D:/AIRtravel/New Monthly/New 2018/Results/griffith_2018m0" + j + ".csv");
+			FileWriter missingAirport = new FileWriter("D:/AIRtravel/New Monthly/New 2018/Results/missing.csv");
+			
 
 			writer.write("year" + "," + "month" + "," + "origin_airport" + "," + "CX1_AIRPORT" + "," + "CX2_AIRPORT"
 					+ "," + "destination_airport" + "," + "airline_1" + "," + "airline_2" + "," + "airline_3" + ","
@@ -122,7 +122,7 @@ public class Main {
 			String newLine;
 			while ((newLine = lineReader.readLine()) != null) {
 				++totalLines;
-				
+
 				String[] row = newLine.split(",");
 
 				if (row[0] == null || row[0].length() == 0 || row[2] == null || row[2].length() == 0 || row[5] == null
@@ -144,8 +144,7 @@ public class Main {
 				 * empty
 				 */
 				if (row[3] == null || row[3].length() == 0) {
-					
-					
+
 					// Use airport_airport
 					CO2Key co2Key = new CO2Key();
 					co2Key.setStartAirport(row[2]);
@@ -172,33 +171,30 @@ public class Main {
 						co2Out.getDISTs()[2] = co2Value.getDistance();
 						co2Out.getCO2Es()[2] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[2] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
-						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[2] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[2] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[2] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
 						co2Out.getCO2Es()[2] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[2] = (Double.valueOf(row[9]) * 0.1);
+						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
+						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
 					}
-					
-					
+
 				}
-				//System.out.println(first);
+				// System.out.println(first);
 				/*
 				 * Handle when the third cell is not empty, but the fourth is
 				 * empty
 				 */
-				
+
 				if (row[3].length() > 0 && (row[4] == null || row[4].length() == 0)) {
 					/*
 					 * Set the values for the first cell of values
 					 */
-					
-					
+
 					CO2Key co2Key = new CO2Key();
 					co2Key.setStartAirport(row[2]);
 					co2Key.setEndAirport(row[3]);
@@ -214,20 +210,19 @@ public class Main {
 						co2Out.getDISTs()[0] = co2Value.getDistance();
 						co2Out.getCO2Es()[0] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[0] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
-						co2Out.setMISSINGDESTINATION(row[3] != null ? row[3] : "");
+
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[0] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[0] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[0] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
 						co2Out.getCO2Es()[0] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[0] = (Double.valueOf(row[9]) * 0.1);
-						
+						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
+						co2Out.setMISSINGDESTINATION(row[3] != null ? row[3] : "");
+
 					}
-					
 
 					/*
 					 * Set the values for the third cell of values
@@ -244,22 +239,21 @@ public class Main {
 						co2Out.getDISTs()[2] = co2Value.getDistance();
 						co2Out.getCO2Es()[2] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[2] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[3] != null ? row[3] : "");
-						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[2] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[2] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[2] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
 						co2Out.getCO2Es()[2] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[2] = (Double.valueOf(row[9]) * 0.1);
-						
+						co2Out.setMISSINGORIGIN(row[3] != null ? row[3] : "");
+						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
+
 					}
 
 				}
-				//System.out.println(first1);
+				// System.out.println(first1);
 
 				/*
 				 * Handle when all cells are not empty
@@ -284,15 +278,14 @@ public class Main {
 						co2Out.getDISTs()[0] = co2Value.getDistance();
 						co2Out.getCO2Es()[0] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[0] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
-						co2Out.setMISSINGDESTINATION(row[3] != null ? row[3] : "");
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[0] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[0] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[0] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
+						co2Out.setMISSINGORIGIN(row[2] != null ? row[2] : "");
+						co2Out.setMISSINGDESTINATION(row[3] != null ? row[3] : "");
 						co2Out.getCO2Es()[0] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[0] = (Double.valueOf(row[9]) * 0.1);
 					}
@@ -300,7 +293,7 @@ public class Main {
 					/*
 					 * Set the values for the second cell of values
 					 */
-					
+
 					co2Key.setStartAirport(row[3]);
 					co2Key.setEndAirport(row[4]);
 					co2Value = co2List.get(co2Key);
@@ -313,17 +306,16 @@ public class Main {
 						co2Out.getDISTs()[1] = co2Value.getDistance();
 						co2Out.getCO2Es()[1] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[1] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[3] != null ? row[3] : "");
-						co2Out.setMISSINGDESTINATION(row[4] != null ? row[4] : "");
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[1] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[1] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[1] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
 						co2Out.getCO2Es()[1] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[1] = (Double.valueOf(row[9]) * 0.1);
+						co2Out.setMISSINGORIGIN(row[3] != null ? row[3] : "");
+						co2Out.setMISSINGDESTINATION(row[4] != null ? row[4] : "");
 					}
 
 					/*
@@ -341,17 +333,16 @@ public class Main {
 						co2Out.getDISTs()[2] = co2Value.getDistance();
 						co2Out.getCO2Es()[2] = co2Value.getPrice1();
 						co2Out.getCO2Ps()[2] = co2Value.getPrice2();
-					}
-					if (co2Value == null) {
-						co2Out.setMISSINGORIGIN(row[4] != null ? row[4] : "");
-						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
 					} else if (co2Valuea != null) {
 						co2Out.getDISTs()[2] = co2Valuea.getDistancea();
 						co2Out.getCO2Es()[2] = co2Valuea.getPrice1a();
 						co2Out.getCO2Ps()[2] = co2Valuea.getPrice2a();
-					} else {
+					}
+					if (co2Value == null && co2Valuea == null) {
 						co2Out.getCO2Es()[2] = (Double.valueOf(row[9]) * 0.1);
 						co2Out.getCO2Ps()[2] = (Double.valueOf(row[9]) * 0.1);
+						co2Out.setMISSINGORIGIN(row[4] != null ? row[4] : "");
+						co2Out.setMISSINGDESTINATION(row[5] != null ? row[5] : "");
 					}
 				}
 
@@ -459,20 +450,18 @@ public class Main {
 				writer.append(co2Out.getDEST_COUNTRY() + ",");
 				writer.append(co2Out.getDEST_REGION() + ",");
 				writer.append("\n");
-				
+
 				if (co2Out.getMISSINGORIGIN() != null && co2Out.getMISSINGORIGIN().length() != 0) {
 					missingAirport.append(co2Out.getMISSINGORIGIN() + ",");
-					totalPercent ++;
+					totalPercent++;
 				}
 				if (co2Out.getMISSINGDESTINATION() != null && co2Out.getMISSINGDESTINATION().length() != 0) {
 					missingAirport.append(co2Out.getMISSINGDESTINATION());
-				} else{
+				} else {
 					continue;
 				}
 				missingAirport.append("\n");
-				
-				
-				
+
 			}
 
 			/*
@@ -486,15 +475,14 @@ public class Main {
 			 * }
 			 */
 			
-			System.out.println(totalPercent);
-			System.out.println(totalLines);
 			float directDistPercent = (float) totalPercent / (float) totalLines * 100;
-			System.out.println(String.format("%.0f%%",directDistPercent));
+			System.out.println(totalPercent + "/" + totalLines + "=" + String.format("%.0f%%", directDistPercent));
 			
 			lineReader.close();
 			writer.flush();
 			writer.close();
 			missingAirport.close();
+			}
 		} catch (
 
 		Exception e) {
