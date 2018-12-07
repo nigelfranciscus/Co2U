@@ -97,11 +97,12 @@ public class Main {
 				regionList.put(regionKey, regionValue);
 			}
 			
+			int current_year = 2018;
 			for (int j = 1; j < 13; j++){
 			BufferedReader lineReader = new BufferedReader(
-					new FileReader("D:/AIRtravel/New Monthly/New 2018/griffith_2018m0" + j + ".csv"));
-			FileWriter writer = new FileWriter("D:/AIRtravel/New Monthly/New 2018/Results/griffith_2018m0" + j + ".csv");
-			FileWriter missingAirport = new FileWriter("D:/AIRtravel/New Monthly/New 2018/Results/missing.csv");
+					new FileReader("D:/AIRtravel/New Monthly/Latest/PyProcessed/griffith_nn_"+ current_year +"m0" + j + ".csv"));
+			FileWriter writer = new FileWriter("D:/AIRtravel/New Monthly/Latest/PyProcessed/Results/griffith_nn_"+ current_year +"m0" + j + ".csv");
+			FileWriter missingAirport = new FileWriter("D:/AIRtravel/New Monthly/Latest/PyProcessed/Results/Missing/missing_nn_"+ current_year +"m0" + j + ".csv");
 			
 
 			writer.write("year" + "," + "month" + "," + "origin_airport" + "," + "CX1_AIRPORT" + "," + "CX2_AIRPORT"
